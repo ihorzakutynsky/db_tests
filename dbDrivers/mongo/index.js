@@ -7,7 +7,7 @@ mongoose.Promise = Promise;
     socketTimeoutMS: 0,
     keepAlive: true,
     reconnectTries: 30,
-    poolSize: 10
+    poolSize: 1
   });
 
   connection.on('connected', function() {
@@ -51,10 +51,6 @@ const APILog = new Schema ({
     },
     body: Schema.Types.Mixed,
     duration: Number,
-    id: {
-      type: String,
-      index: true
-    },
     request: String,
     request_method: String,
     server: String,
@@ -82,7 +78,7 @@ const insert = (item) => {
 
 const inserMany = (items) => {
   return new Promise((resolve, reject) => {
-    model.insertMany(items, function(error, data) { 
+    model.insertMany(items, function(error, data) {
       if(error) reject(error);
       resolve(data);
     })

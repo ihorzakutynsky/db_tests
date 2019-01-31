@@ -1,6 +1,6 @@
 const { generateMockLogs } = require("./helper");
 
-const dbDrivers = ["mongo", "redis", "elasticsearch"];
+const dbDrivers = ["mongo", "redis", "elasticsearch", "dynamo"];
 
 const dbType = process.argv[2] || "redis";
 const documentsCount = process.argv[3] || 40000;
