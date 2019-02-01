@@ -12,9 +12,10 @@ mongoose.Promise = Promise;
     keepAlive: true,
     reconnectTries: 30,
     poolSize: 20,
+    ssl: true,
+    sslValidate: false,
     sslCA: certFileBuf
   });
-
 
   connection.on('connected', function() {
     console.log('Mongoose connection open');
