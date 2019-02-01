@@ -1,16 +1,21 @@
 const mongoose = require('mongoose');
+const fs = require("fs");
+
 const Schema = mongoose.Schema;
 
+const certFileBuf = fs.readFileSync("rds-combined-ca-bundle.pem");
+
 mongoose.Promise = Promise;
-  const connection = mongoose.createConnection("mongodb://localhost:27017/adp-dev", {
+  const connection = mongoose.createConnection("mongodb://root:simplepass@test.cluster-cna13kpauevw.us-west-2.docdb.amazonaws.com:27017/adp-dev?replicaSet=rs0", {
     useMongoClient: true,
     socketTimeoutMS: 0,
     keepAlive: true,
     reconnectTries: 30,
-    poolSize: 20
+    poolSize: 20,
+    sslCA: certFileBuf
   });
 
-  
+
   connection.on('connected', function() {
     console.log('Mongoose connection open');
   });
