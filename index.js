@@ -2,8 +2,8 @@ const { generateMockLogs } = require("./helper");
 
 const dbDrivers = ["mongo", "redis", "elasticsearch", "dynamo"];
 
-const dbType = process.argv[2] || "redis";
-const documentsCount = process.argv[3] || 40000;
+const dbType = process.argv[2] || "mongo";
+const documentsCount = process.argv[3] || 1000;
 
 if (!dbDrivers.includes(dbType)) {
     console.log(`Driver ${dbType} not found`);
