@@ -15,22 +15,17 @@ const db = require(`./dbDrivers/${dbType}`);
 const run = async () => {
     console.log("Start data gen");
     const data = await generateMockLogs(documentsCount);
-
-    // const mongoInstances = data.map(item => new db.model(item));
-    
     console.log("Finish data gen");
-
-    // const savePromises = mongoInstances.map(item => {
-    //     return new Promise((resolve, reject) => {
-    //         db.insert(item).then(res => resolve(res)).catch(e => reject(e))
-    //     })
-    // })
+    const savePromises = data.map(item => {
+        return new Promise((resolve, reject) => {
+            db.insert(item).then(res => resolve(res)).catch(e => reject(e))
+        })
+    })
 
     const startTime = Date.now();
 
     try {
-        // const res = await Promise.all(savePromises);
-        const res = await db.insertMany(data);
+        const res = await Promise.all(savePromises);
         const took = Date.now() - startTime;
         console.log(`Res: ${res.length}, Time: ${took} ms, Avg: ${took / res.length} ms/request.`);
     } catch (e) { console.log(e) }

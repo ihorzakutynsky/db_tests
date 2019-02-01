@@ -1,11 +1,12 @@
 const AWS = require("aws-sdk");
+AWS.config.loadFromPath('./aws_config.json');
 
 const dynamodb = new AWS.DynamoDB();
 
 const insert = (item) => {
     const params = {
         Item: item,
-        TableName: 'ApiLogs'
+        TableName: 'adpdev'
     }
 
     return new Promise((resolve, reject) => {
