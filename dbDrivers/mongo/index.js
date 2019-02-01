@@ -82,7 +82,7 @@ const insert = (instance) => {
   return instance.save();
 }
 
-const inserMany = (items) => {
+const insertMany = (items) => {
   return new Promise((resolve, reject) => {
     model.insertMany(items, function(error, data) {
       if(error) reject(error);
@@ -94,5 +94,5 @@ const inserMany = (items) => {
 module.exports = {
   insert,
   model, 
-  inserMany
+  insertMany
 }
