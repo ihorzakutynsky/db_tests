@@ -78,12 +78,11 @@ const APILog = new Schema ({
   
 const model = connection.model('apilog', APILog);
 
-const insert = (item) => {
-  const instance = new model(item);
+const insert = (instance) => {
   return instance.save();
 }
 
-const insertMany = (items) => {
+const inserMany = (items) => {
   return new Promise((resolve, reject) => {
     model.insertMany(items, function(error, data) {
       if(error) reject(error);
@@ -94,6 +93,6 @@ const insertMany = (items) => {
 
 module.exports = {
   insert,
-  insertMany
+  model, 
+  inserMany
 }
-  

@@ -15,9 +15,12 @@ const db = require(`./dbDrivers/${dbType}`);
 const run = async () => {
     console.log("Start data gen");
     const data = await generateMockLogs(documentsCount);
+
+    const mongoInstances = data.map(item => new db.model(item));
+    
     console.log("Finish data gen");
 
-    const savePromises = data.map(item => {
+    const savePromises = mongoInstances.map(item => {
         return new Promise((resolve, reject) => {
             db.insert(item).then(res => resolve(res)).catch(e => reject(e))
         })
