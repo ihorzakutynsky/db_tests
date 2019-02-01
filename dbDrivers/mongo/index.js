@@ -7,9 +7,10 @@ mongoose.Promise = Promise;
     socketTimeoutMS: 0,
     keepAlive: true,
     reconnectTries: 30,
-    poolSize: 1
+    poolSize: 20
   });
 
+  
   connection.on('connected', function() {
     console.log('Mongoose connection open');
   });
